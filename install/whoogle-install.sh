@@ -5,14 +5,6 @@
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
-while getopts port:https-only: flag
-do
-    case "${flag}" in
-        port) port=${OPTARG};;
-        https-only) https-only=${OPTARG};;
-    esac
-done
-
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
 verb_ip6
@@ -43,7 +35,7 @@ echo "[Unit]
 Description=Whoogle-Search
 After=network.target
 [Service]
-ExecStart=/usr/local/bin/whoogle-search --host 0.0.0.0 --port ${port:-5000}
+ExecStart=/usr/local/bin/whoogle-search --host 0.0.0.0 --port ${1:-5000}
 Restart=always
 User=root
 [Install]
